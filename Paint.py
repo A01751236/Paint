@@ -3,9 +3,9 @@ from freegames import vector
 
 def line(start, end):
     "Draw line from start to end."
-    up()
-    goto(start.x, start.y)
-    down()
+    up() #levantar la pluma
+    goto(start.x, start.y) #moverse a algun lugar 
+    down() #regresar la pluma 
     goto(end.x, end.y)
 
 def square(start, end):
@@ -15,15 +15,22 @@ def square(start, end):
     down()
     begin_fill()
 
-    for count in range(4):
-        forward(end.x - start.x)
-        left(90)
+    for count in range(4): #loop
+        forward(end.x - start.x) #ubicacion
+        left(90) #rota hacia la izquierda 4 veces
 
     end_fill()
 
 def circle(start, end):
     "Draw circle from start to end."
-    pass  # TODO
+    up() #levantar la pluma
+    goto(start.x, start.y) #moverse a algun lugar 
+    down() #regresar la pluma 
+    
+    import turtle
+    turtle.circle((end.x - start.x)/2)
+    
+    end_fill()
 
 def rectangle(start, end):
     "Draw rectangle from start to end."
@@ -33,13 +40,13 @@ def triangle(start, end):
     "Draw triangle from start to end."
     pass  # TODO
 
-def tap(x, y):
+def tap(x, y): #Funcion de clicks
     "Store starting point or draw shape."
-    start = state['start']
+    start = state['start'] #primer  click none
 
     if start is None:
-        state['start'] = vector(x, y)
-    else:
+        state['start'] = vector(x, y) #condicion guardar segunda entrada
+    else: #Se realiza al tener una ubicacion guardada 
         shape = state['shape']
         end = vector(x, y)
         shape(start, end)
@@ -49,16 +56,17 @@ def store(key, value):
     "Store value in state at key."
     state[key] = value
 
-state = {'start': None, 'shape': line}
+state = {'start': None, 'shape': line} #condicion guaradar entrada
 setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
-onkey(undo, 'u')
-onkey(lambda: color('black'), 'K')
+onkey(undo, 'u') #rehacer una accion
+onkey(lambda: color('black'), 'K') #cam
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('yellow'), 'Y')
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
