@@ -1,12 +1,13 @@
+#Librerías
 from turtle import *
 from freegames import vector
 
 
 def line(start, end):
     #Dibujar una línea de inicio a fin
-    up() #levantar la pluma
-    goto(start.x, start.y) #moverse a algun lugar
-    down() #regresar la pluma
+    up() #Levantar la pluma
+    goto(start.x, start.y) #Moverse a algun lugar
+    down() #Regresar la pluma
     goto(end.x, end.y)
 
 
@@ -17,21 +18,21 @@ def square(start, end):
     down()
     begin_fill()
 
-    for count in range(4): #loop
-        forward(end.x - start.x) #ubicacion
-        left(90) #rota hacia la izquierda 4 veces
+    for count in range(4): #Loop
+        forward(end.x - start.x) #Ubicacion
+        left(90) #Rota hacia la izquierda 4 veces
 
     end_fill()
 
 
 def circle(start, end):
     #Dibujar un círculo de inicio a fin
-    up() #levantar la pluma
-    goto(start.x, start.y) #moverse a algun lugar
-    down() #regresar la pluma
+    up() #Levantar la pluma
+    goto(start.x, start.y) #Moverse a algun lugar
+    down() #Regresar la pluma
 
     import turtle
-    turtle.circle((end.x - start.x)/2)
+    turtle.circle((end.x - start.x)/2) #Funcion para hacer un círculo.
 
     end_fill()
 
@@ -56,7 +57,7 @@ def triangle(start, end):
     down()
     begin_fill()
 
-    for i in range(3):
+    for i in range(3): #Loop para dibujar los 3 lados del triángulo
         forward(end.x - start.x)
         left(120)
 
@@ -68,7 +69,7 @@ def tap(x, y): #Funcion de clicks
     start = state['start'] #primer  click none
 
     if start is None:
-        state['start'] = vector(x, y) #condicion guardar segunda entrada
+        state['start'] = vector(x, y) #Condicion guardar segunda entrada
     else: #Se realiza al tener una ubicacion guardada
         shape = state['shape']
         end = vector(x, y)
@@ -81,18 +82,19 @@ def store(key, value):
     state[key] = value
 
 
-state = {'start': None, 'shape': line} #condicion guaradar entrada
+state = {'start': None, 'shape': line} #Condicion guaradar entrada
 setup(420, 420, 370, 0)
 onscreenclick(tap)
+#Leer los inputs del usuario
 listen()
-onkey(undo, 'u') #rehacer una accion
-onkey(lambda: color('black'), 'K') #cam
+onkey(undo, 'u') #Rehacer una accion
+onkey(lambda: color('black'), 'K')
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
-onkey(lambda: color('yellow'), 'Y') #color añadido
-#teclas para elegir qué forma se va a hacer
+onkey(lambda: color('yellow'), 'Y') #Color añadido para el ejercicio
+#Teclas para elegir qué figura se va a hacer
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
